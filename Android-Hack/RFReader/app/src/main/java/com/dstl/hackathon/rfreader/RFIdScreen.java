@@ -3,15 +3,21 @@ package com.dstl.hackathon.rfreader;
 
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.view.MotionEvent;
 import android.view.View;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.widget.EditText;
+import android.widget.GridLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -141,7 +147,14 @@ public class RFIdScreen extends AppCompatActivity {
     }
 
     private NfcAdapter nfcAdapter;
-    TextView textViewInfo;
+
+    //All the labels and text fields
+    TextView rfidLabel;
+    EditText nameField;
+    EditText familyNameField;
+    Switch gender;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +164,7 @@ public class RFIdScreen extends AppCompatActivity {
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);
+        mContentView = findViewById(R.id.fullscreen_content_controls);
 
 
         // Set up the user interaction to manually show or hide the system UI.
@@ -165,11 +178,34 @@ public class RFIdScreen extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
-        textViewInfo = (TextView)findViewById(R.id.info);
 
-        textViewInfo.setText("Hello world");
+
+
+        rfidLabel = (TextView)findViewById(R.id.rfidCode);
+        nameField = (EditText)findViewById(R.id.nameField);
+        familyNameField = (EditText)findViewById(R.id.familyNameField);
+        gender = (Switch)findViewById(R.id.gender);
+
+        rfidLabel.setText("RFID Code");
+        rfidLabel.setTextAppearance(this, android.R.style.TextAppearance_Large);
+        rfidLabel.setTextColor(Color.WHITE);
+        rfidLabel.setTextSize(50);
+        rfidLabel.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        nameField.setTextColor(Color.WHITE);
+        nameField.setTextSize(30);
+        nameField.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        familyNameField.setTextColor(Color.WHITE);
+        familyNameField.setTextSize(30);
+        familyNameField.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        gender.setTextColor(Color.WHITE);
+        gender.setTextSize(30);
+        gender.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if(nfcAdapter == null){
@@ -201,28 +237,18 @@ public class RFIdScreen extends AppCompatActivity {
 
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             if(tag == null){
-                textViewInfo.setText("tag == null");
+                rfidLabel.setText("tag == null");
             }else{
 
-                textViewInfo.setText("I am in the tag");
-                String tagInfo = tag.toString() + "\n";
+                String tagInfo = "";
 
-                tagInfo += "\nTag Id: \n";
                 byte[] tagId = tag.getId();
-                tagInfo += "length = " + tagId.length +"\n";
+
                 for(int i=0; i<tagId.length; i++){
                     tagInfo += Integer.toHexString(tagId[i] & 0xFF) + " ";
                 }
-                tagInfo += "\n";
 
-                String[] techList = tag.getTechList();
-                tagInfo += "\nTech List\n";
-                tagInfo += "length = " + techList.length +"\n";
-                for(int i=0; i<techList.length; i++){
-                    tagInfo += techList[i] + "\n ";
-                }
-
-                textViewInfo.setText(tagInfo);
+                rfidLabel.setText(tagInfo);
             }
         }else{
             Toast.makeText(this,

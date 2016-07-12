@@ -8,22 +8,12 @@
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-    <TextView
-        android:id="@+id/fullscreen_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="@string/dummy_content"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold" />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
         <LinearLayout
@@ -36,22 +26,61 @@
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <Button
-                android:id="@+id/dummy_button"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/dummy_button" />
-
         </LinearLayout>
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="464dp"
+            android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/info"
-            android:layout_gravity="center_horizontal|top" />
-    </FrameLayout>
+            android:id="@+id/rfidCode"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.10" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Not Assigned"
+            android:ems="10"
+            android:id="@+id/nameField"
+            android:layout_weight="0.10" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Not Assigned"
+            android:ems="10"
+            android:id="@+id/familyNameField"
+            android:layout_weight="0.10" />
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Not Assigned"
+            android:id="@+id/gender"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.10" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.10" />
+
+
+    </LinearLayout>
 
 </FrameLayout>
