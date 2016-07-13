@@ -1,7 +1,5 @@
 package com.dstl.hackathon.rfreader;
 
-
-
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -10,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Layout;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.content.Intent;
@@ -33,7 +32,7 @@ public class RFIdScreen extends AppCompatActivity {
 
 
 
-
+    static String gazLog = "gazlog";
 
 
     private static final boolean AUTO_HIDE = true;
@@ -146,7 +145,6 @@ public class RFIdScreen extends AppCompatActivity {
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
 
-    private NfcAdapter nfcAdapter;
 
     //All the labels and text fields
     TextView rfidLabel;
@@ -206,54 +204,17 @@ public class RFIdScreen extends AppCompatActivity {
         gender.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
-
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if(nfcAdapter == null){
-            Toast.makeText(this,
-                    "NFC NOT supported on this devices!",
-                    Toast.LENGTH_LONG).show();
-            finish();
-        }else if(!nfcAdapter.isEnabled()) {
-            Toast.makeText(this,
-                    "NFC NOT Enabled!",
-                    Toast.LENGTH_LONG).show();
-            finish();
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        Log.i(gazLog,"RFID not yet tracked is resuming");
 
-
-        Intent intent = getIntent();
-        String action = intent.getAction();
-
-        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)) {
-            Toast.makeText(this,
-                    "onResume() - ACTION_TAG_DISCOVERED",
-                    Toast.LENGTH_SHORT).show();
-
-            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            if(tag == null){
-                rfidLabel.setText("tag == null");
-            }else{
-
-                String tagInfo = "";
-
-                byte[] tagId = tag.getId();
-
-                for(int i=0; i<tagId.length; i++){
-                    tagInfo += Integer.toHexString(tagId[i] & 0xFF) + " ";
-                }
-
-                rfidLabel.setText(tagInfo);
-            }
-        }else{
-            Toast.makeText(this,
-                    "onResume() : " + action,
-                    Toast.LENGTH_SHORT).show();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            rfidLabel.setText(extras.getString("RFID"));
         }
 
     }

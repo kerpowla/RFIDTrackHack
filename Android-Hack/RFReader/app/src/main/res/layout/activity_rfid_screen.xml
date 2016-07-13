@@ -44,7 +44,8 @@
             android:text="New Text"
             android:id="@+id/rfidCode"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.10" />
+            android:layout_weight="0.10"
+            android:layout_marginTop="20dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -73,12 +74,11 @@
             android:layout_weight="0.10" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="329dp"
             android:layout_height="wrap_content"
             android:text="Submit"
             android:id="@+id/button"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.10" />
+            android:layout_gravity="center_horizontal" />
 
 
     </LinearLayout>

@@ -3,4 +3,8 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_user_tracked">UserTrackedActivity</string>
+
+    <string name="title_activity_user_is_tracked">UserIsTracked</string>
 </resources>
