@@ -2,4 +2,4 @@
 
 Internal hack using RFID technology. 
 
-This will go private soon so please make sure you have a GitHub account/commit something so you can still access it.
+This will go private at some point, so please make sure you have a GitHub account so I can add you to the contributor list.
